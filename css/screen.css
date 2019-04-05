@@ -1,26 +1,27 @@
 /*------------------------------------*\
   #FONTS
 \*------------------------------------*/
+
 @font-face {
-  font-family: "HK Grotesk Web";
-  font-weight: 200;
-  src:url("../fonts/hkgrotesk-light-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-light-webfont.woff") format("woff");
+    font-family: "HK Grotesk Web";
+    font-weight: 200;
+    src: url("../fonts/hkgrotesk-light-webfont.woff2") format("woff2"),
+         url("../fonts/hkgrotesk-light-webfont.woff") format("woff");
 }
 
-@font-face
-{
-  font-family: "HK Grotesk Web";
-  font-weight: 400;
-  src:url("../fonts/hkgrotesk-regular-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-regular-webfont.woff") format("woff");
+@font-face {
+    font-family: "HK Grotesk Web";
+    font-weight: 400;
+    src: url("../fonts/hkgrotesk-regular-webfont.woff2") format("woff2"),
+         url("../fonts/hkgrotesk-regular-webfont.woff") format("woff");
 }
 
-@font-face
-{
-  font-family: "HK Grotesk Web";
-  font-weight: 600;
-  src:url("../fonts/hkgrotesk-medium-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-medium-webfont.woff") format("woff");
+@font-face {
+    font-family: "HK Grotesk Web";
+    font-weight: 600;
+    src: url("../fonts/hkgrotesk-medium-webfont.woff2") format("woff2"),
+         url("../fonts/hkgrotesk-medium-webfont.woff") format("woff");
 }
-
 
 /*------------------------------------*\
   #GENERIC
@@ -36,7 +37,7 @@ html {
     font-size: 16px;
     line-height: 1.5;
     font-family: "HK Grotesk Web", Helvetica, arial, sans-serif;
-    color: #111;
+    color: #202024;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -48,12 +49,25 @@ html {
     box-sizing: inherit;
 }
 
+@media (min-width: 768px) {
+    html {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+}
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
  *
  * Customize the background color to match your design.
  */
+
+::-moz-selection {
+    background: #5051DB;
+    color: white;
+    text-shadow: none;
+}
 
 ::selection {
     background: #5051DB;
@@ -81,6 +95,12 @@ img {
     ---
     Default markup for typographic elements
 */
+
+h1,
+h2,
+h3 {
+    font-weight: 200;
+}
 
 h1 {
     font-size: 36px;
@@ -156,16 +176,12 @@ hr {
 }
 
 a {
-    color: RoyalBlue;
     color: #5051DB;
     transition: all .1s ease-in-out;
 }
 
 a:visited,
-a:active {
-    color: BlueViolet;
-}
-
+a:active,
 a:hover,
 a:focus {
     color: #3E3EA8;
@@ -182,10 +198,9 @@ a:focus {
 */
 
 .o-row {
+    overflow: auto;
     position: relative;
     padding: 24px 24px 0;
-    display: flex;
-    flex-direction: column;
 }
 
 /* size modifiers */
@@ -194,13 +209,21 @@ a:focus {
     padding: 48px 24px 24px;
 }
 
-@media (min-width: 768px)
-{
-  html
-  {
-    font-size: 20px;
-    line-height: 1.6;
-  }
+@media (min-width: 768px) {
+    .o-row {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .o-row--md {
+        padding-top: 48px;
+        padding-bottom: 24px;
+    }
+
+    .o-row--lg {
+        padding-top: 72px;
+        padding-bottom: 48px;
+    }
 }
 
 /*
@@ -332,22 +355,142 @@ a:focus {
     align-content: space-between;
 }
 
+/*
+    Objects: section
+    ---
+    Creates vertical whitespace between adjacent sections inside a row
+*/
+
+.o-section {
+    overflow-x: hidden;
+}
+
+.o-section + .o-section {
+    margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+    .o-section--lg + .o-section--lg,
+    .o-section--xl + .o-section--xl {
+        margin-top: 48px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .o-section--xl + .o-section--xl {
+        margin-top: 72px;
+    }
+}
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+    list-style: none;
+    padding: 0;
+}
+
 /*------------------------------------*\
   #COMPONENTS
 \*------------------------------------*/
-.c-logo{
+
+/*
+    Component: header
+    ---
+    Main header of the website
+*/
+
+.c-header__nav {
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .c-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .c-header__nav {
+        display: block;
+    }
+}
+
+/*
+    Component: Logo
+    ---
+    Website main logo
+*/
+
+.c-logo {
     height: 32px;
 }
 
-.c-logo_symbol{
+.c-logo__symbol {
     height: 100%;
 }
 
-@media  {
-    .c-logo{
+@media (min-width: 768px) {
+    .c-logo {
         height: 40px;
     }
 }
+
+/*
+    Component: Nav
+    ---
+    Main navigation of the site
+*/
+
+.c-nav {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.c-nav--meta {
+    font-size: 16px;
+}
+
+.c-nav__link {
+    display: block;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 8px 0;
+}
+
+.c-nav__link,
+.c-nav__link:visited,
+.c-nav__link:active {
+    color: #202024;
+}
+
+.c-nav__link--meta,
+.c-nav__link--meta:visited,
+.c-nav__link--meta:active {
+    color: #6C6C75;
+}
+
+.is-selected .c-nav__link,
+.c-nav__link:hover,
+.c-nav__link:focus {
+    color: #5051db;
+}
+
+@media (min-width: 768px) {
+    .c-nav__list {
+        display: flex;
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    .c-nav__link {
+        padding: 8px 16px;
+    }
+}
+
 /*------------------------------------*\
   #UTILITIES
 \*------------------------------------*/
@@ -579,6 +722,16 @@ a:focus {
     .u-5-of-6-bp4 {
         width: 83.3333333333% !important;
     }
+}
+
+/*
+    Utilities: spacing
+    ---
+    Utility classes to put specific margins and paddings onto elements
+*/
+
+.u-pt-clear {
+    padding-top: 0 !important;
 }
 
 /*------------------------------------*\
